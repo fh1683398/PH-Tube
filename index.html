@@ -8,10 +8,31 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
     <title>PH-Tube</title>
+
+    <style>
+        .inter-font {
+            font-family: "Inter", sans-serif;
+        }
+
+        .active {
+            background-color: red;
+            font-weight: 500;
+        }
+
+        button {
+            cursor: pointer;
+        }
+    </style>
 </head>
 
-<body>
+<body class="inter-font">
     <nav class="flex justify-between items-center max-w-[1320px] mx-auto py-8 border-b border-gray-300">
         <div><img class="w-[175px]" src="./assets/Logo.png" alt=""></div>
 
@@ -19,12 +40,20 @@
             <input class="flex-1 px-4 py-2 pr-10 rounded-lg border border-gray-500" type="search">
             <i class="fa-solid fa-magnifying-glass absolute right-5 border-l-2 pl-2 cursor-pointer text-gray-500"></i>
         </div>
-        
+
         <div>
             <button class="bg-red-500 px-5 py-2 rounded-lg text-white font-semibold text-lg">Sort</button>
         </div>
     </nav>
-    <main></main>
+    <main class="max-w-[1320px] mx-auto">
+        <div id="button-container" class="flex justify-center gap-4 pt-8">
+            <button class="bg-gray-400 text-white px-5 py-3 rounded-lg active">All</button>
+
+        </div>
+        <div id="video-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 py-10">
+
+        </div>
+    </main>
     <script src="./index.js"></script>
 </body>
 
