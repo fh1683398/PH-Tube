@@ -1,5 +1,4 @@
 const categoryUrl = 'https://openapi.programming-hero.com/api/phero-tube/categories'
-const videosUrl = 'https://openapi.programming-hero.com/api/phero-tube/videos'
 
 // load Category
 const loadCategory = () => {
@@ -23,11 +22,12 @@ const showCategories = (categories) => {
 //load videos based on given category
 const loadCategoryVideos = (id) => {
     fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${id}`)
-    .then(res => res.json())
-    .then(data => showVideos(data.category))
+        .then(res => res.json())
+        .then(data => showVideos(data.category))
 }
 // load Videos
-const loadVideos = () => {
+const loadVideos = (searchText = "") => {
+    const videosUrl = `https://openapi.programming-hero.com/api/phero-tube/videos?title=${searchText}`
     fetch(videosUrl)
         .then(res => res.json())
         .then(data => showVideos(data.videos))
@@ -37,15 +37,15 @@ const showVideos = (videos) => {
     const videoContainer = document.getElementById('video-container')
     document.getElementById('video-container').innerHTML = ""
 
-    if(videos.length === 0){
+    if (videos.length === 0) {
         videoContainer.classList.remove('grid')
         document.getElementById('video-container').innerHTML = `
-            <div class="flex flex-col items-center justify-center h-[calc(100vh-270px)]">
+            <div class="flex flex-col items-center justify-center h-[calc(100vh-270px)] gap-4">
                 <img src="assets/Icon.png" />
-                <h2>No content here</h2>
+                <h2 class="text-3xl font-bold text-center">Oops!! Sorry, There is no <br> content here</h2>
             </div>
         `
-    }else{
+    } else {
         videoContainer.classList.add('grid')
     }
     videos.forEach(video => {
@@ -84,7 +84,7 @@ const convertTime = (time) => {
     let hour = ""
     let minute = ""
 
-    if(time > 86400){
+    if (time > 86400) {
         day = Math.floor(time / 86400)
     }
     let remainingSecond = time % 86400
@@ -100,12 +100,17 @@ const convertTime = (time) => {
     remainingSecond = remainingSecond % 60
 
     return [
-        day > 0 ? `${day}d` : "", 
+        day > 0 ? `${day}d` : "",
         hour > 0 ? `${hour}h` : "",
         minute > 0 ? `${minute}m` : 0,
         remainingSecond > 0 ? `${remainingSecond}s` : ""
     ].join(" ")
 }
+
+document.getElementById('search').addEventListener('keyup', (e) => {
+    loadVideos(e.target.value)
+})
+
 
 loadCategory()
 loadVideos()
